@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+<p>
+  <strong>Priority:</strong>
+  <%= @task.priority %>
+</p>  
+<p>
+  <strong>Created by:</strong>
+  <%= @task.user.name %>
+</p>  
+<p>
+  <strong>Status:</strong>
+  <% if @task.status %>
+    Done by <%= @task.worker.name %>
+  <% else %>
+    Pending
+    <%= form_with(model: @task, local: true) do |form| %>
+      <%= form.hidden_field :status, id: :task_status, value: true %>
+      <%= form.submit 'Mark as done', id: 'done_button' %>
+    <% end %>
+  <% end %>
+</p>  
+<p><strong>Attachments: </strong>
+    <% @task.attachments.each do |attachment| %>
+      <p>&emsp;<%= link_to attachment.file.original_filename, attachment.file.url %> | <%= link_to 'Destroy', attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </p>
+    <% end %>
+    <p>&emsp;<%= link_to 'Add attachment', new_attachment_path(task: @task) %></p>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Search', search_path %> |
+<%= link_to 'Dashboard', tasks_path %>

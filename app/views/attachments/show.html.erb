@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= link_to @attachment.file.original_filename, @attachment.file.url %></p>
+
+<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
+<%= link_to 'Back', attachments_path %>

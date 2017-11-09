@@ -1,0 +1,15 @@
+<%= simple_form_for(@attachment, multipart: true) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="field">
+      <%= f.label :file %>
+      <%= f.file_field :file %>
+      <%= f.hidden_field :task_id, id: :file_task_id, value: @task.id %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
